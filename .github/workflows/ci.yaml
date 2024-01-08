@@ -18,3 +18,19 @@ jobs:
           cache: yarn
       - run: yarn
       - run: yarn workspace @project/web-app build
+
+  build-yarn-v2:
+    runs-on:
+      # Replace with your profile label https://namespace.so/docs/features/faster-github-actions#using-runner-profiles
+      - namespace-profile-amd64-with-caching
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          yarn set version berry
+          yarn --version
+      - name: Set up cache
+        uses: namespacelabs/nscloud-cache-action@v1
+        with:
+          cache: yarn
+      - run: yarn
+      - run: yarn workspace @project/web-app build
